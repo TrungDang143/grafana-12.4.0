@@ -5,6 +5,7 @@ import { DataLinkBuiltInVars, getTimeZone, ScopedVars, urlUtil } from '@grafana/
 import { getTimeSrv } from '../dashboard/services/TimeSrv';
 import { getVariablesUrlParams } from '../variables/getAllVariableValuesForUrl';
 
+import { customFilterService } from './customFilterService';
 import { dataMacro, fieldMacro, seriesNameMacro, valueMacro } from './dataMacros';
 import { MacroHandler } from './types';
 
@@ -16,6 +17,10 @@ export const macroRegistry: Record<string, MacroHandler> = {
   [DataLinkBuiltInVars.includeVars]: includeVarsMacro,
   [DataLinkBuiltInVars.keepTime]: urlTimeRangeMacro,
   ['__timezone']: timeZoneMacro,
+  ['__factory']: customFilterMacro('factory'),
+  ['__productionLine']: customFilterMacro('productionLine'),
+  ['__productionStation']: customFilterMacro('productionStation'),
+  ['__productName']: customFilterMacro('productName'),
 };
 
 function includeVarsMacro(match: string, fieldPath?: string, scopedVars?: ScopedVars) {
@@ -30,4 +35,10 @@ function urlTimeRangeMacro() {
 function timeZoneMacro() {
   const timeZone = getTimeZone({ timeZone: getTimeSrv().timeModel?.getTimezone() });
   return timeZone === 'browser' ? moment.tz.guess() : timeZone;
+}
+
+function customFilterMacro(filterName: string) {
+  return () => {
+    return customFilterService.getFilter(filterName);
+  };
 }
