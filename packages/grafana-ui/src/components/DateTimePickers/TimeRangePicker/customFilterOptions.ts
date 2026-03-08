@@ -11,38 +11,38 @@ export const getCustomRelativeTimeRanges = (): TimeOption[] => [
     display: t('custom-filters.time-ranges.now', 'Hiện tại'),
   },
   {
-    from: 'now/d',
-    to: 'now/d+1d',
+    from: 'now/d',        // đầu ngày hiện tại
+    to: 'now/d',   // cuối ngày hiện tại (giây cuối cùng)
     display: t('custom-filters.time-ranges.today', 'Trong ngày'),
   },
   {
-    from: 'now/w',
-    to: 'now/w+1w',
+    from: 'now/w',        // đầu tuần (thứ 2)
+    to: 'now/w',   // cuối tuần (chủ nhật)
     display: t('custom-filters.time-ranges.this-week', 'Trong tuần'),
   },
   {
-    from: 'now-1w/w',
-    to: 'now-1w/w+1w',
+    from: 'now-1w/w',     // đầu tuần trước
+    to: 'now-1w/w',// cuối tuần trước
     display: t('custom-filters.time-ranges.last-week', 'Tuần trước'),
   },
   {
-    from: 'now/M',
-    to: 'now/M+1M',
+    from: 'now/M',        // đầu tháng hiện tại
+    to: 'now/M',   // cuối tháng hiện tại
     display: t('custom-filters.time-ranges.this-month', 'Trong tháng'),
   },
   {
-    from: 'now-1M/M',
-    to: 'now-1M/M+1M',
+    from: 'now-1M/M',     // đầu tháng trước
+    to: 'now-1M/M',// cuối tháng trước
     display: t('custom-filters.time-ranges.last-month', 'Tháng trước'),
   },
   {
-    from: 'now/y',
-    to: 'now/y+1y',
+    from: 'now/y',        // đầu năm hiện tại
+    to: 'now/y',   // cuối năm hiện tại
     display: t('custom-filters.time-ranges.this-year', 'Trong năm'),
   },
   {
-    from: 'now-1y/y',
-    to: 'now-1y/y+1y',
+    from: 'now-1y/y',     // đầu năm trước
+    to: 'now-1y/y',// cuối năm trước
     display: t('custom-filters.time-ranges.last-year', 'Năm trước'),
   },
 ];

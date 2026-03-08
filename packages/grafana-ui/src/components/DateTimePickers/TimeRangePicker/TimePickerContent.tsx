@@ -585,7 +585,7 @@ const getFullScreenStyles = (theme: GrafanaTheme2, hideQuickRanges?: boolean) =>
     display: 'flex',
     flexDirection: 'column',
     flex: 1,
-    overflow: 'auto',
+    overflow: 'visible',
     paddingLeft: '4px',
   }),
   title: css({

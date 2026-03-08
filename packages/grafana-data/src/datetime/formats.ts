@@ -12,8 +12,8 @@ export interface SystemDateFormatSettings {
   useBrowserLocale: boolean;
 }
 
-const DEFAULT_SYSTEM_DATE_FORMAT = 'YYYY-MM-DD HH:mm:ss';
-const DEFAULT_SYSTEM_DATE_MS_FORMAT = 'YYYY-MM-DD HH:mm:ss.SSS';
+const DEFAULT_SYSTEM_DATE_FORMAT = 'HH:mm:ss DD-MM-YYYY';
+const DEFAULT_SYSTEM_DATE_MS_FORMAT = 'HH:mm:ss.SSS DD-MM-YYYY';
 
 export class SystemDateFormatsState {
   fullDate = DEFAULT_SYSTEM_DATE_FORMAT;

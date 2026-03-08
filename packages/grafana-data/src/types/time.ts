@@ -63,15 +63,15 @@ export interface TimeOptions {
 
 export type TimeFragment = string | DateTime;
 
-export const TIME_FORMAT = 'YYYY-MM-DD HH:mm:ss';
+export const TIME_FORMAT = 'HH:mm:ss DD-MM-YYYY';
 
 export function getDefaultTimeRange(): TimeRange {
   const now = dateTime();
 
   return {
-    from: dateTime(now).subtract(6, 'hour'),
+    from: now,
     to: now,
-    raw: { from: 'now-6h', to: 'now' },
+    raw: { from: 'now', to: 'now' },
   };
 }
 

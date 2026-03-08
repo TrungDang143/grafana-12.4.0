@@ -14,6 +14,7 @@ import { WeekStart } from '../WeekStartPicker';
 import { Body } from './CalendarBody';
 import { Footer } from './CalendarFooter';
 import { Header } from './CalendarHeader';
+import { CalendarTime } from './CalendarTime';
 
 export const getStyles = (theme: GrafanaTheme2, isReversed = false) => {
   return {
@@ -21,6 +22,7 @@ export const getStyles = (theme: GrafanaTheme2, isReversed = false) => {
       top: 0,
       position: 'absolute',
       [`${isReversed ? 'left' : 'right'}`]: '546px', // lmao
+      zIndex: 99999,
     }),
 
     modalContainer: css({
@@ -47,7 +49,7 @@ export const getStyles = (theme: GrafanaTheme2, isReversed = false) => {
       position: 'fixed',
       top: '50%',
       transform: 'translate(-50%, -50%)',
-      zIndex: theme.zIndex.modal,
+      zIndex: 100000,
     }),
   };
 };
@@ -108,6 +110,7 @@ function TimePickerCalendar(props: TimePickerCalendarProps) {
     >
       <Header {...props} />
       <Body {...props} />
+      <CalendarTime {...props} />
       {showInModal && <Footer {...props} />}
     </section>
   );
