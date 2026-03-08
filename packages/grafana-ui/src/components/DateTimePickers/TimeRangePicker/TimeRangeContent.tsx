@@ -1,5 +1,5 @@
 import { css } from '@emotion/css';
-import { FormEvent, useCallback, useEffect, useId, useState } from 'react';
+import { FormEvent, useCallback, useEffect, useId, useState, forwardRef, useImperativeHandle } from 'react';
 import * as React from 'react';
 
 import {
@@ -14,7 +14,7 @@ import {
   TimeZone,
 } from '@grafana/data';
 import { selectors } from '@grafana/e2e-selectors';
-import { t, Trans } from '@grafana/i18n';
+import { t } from '@grafana/i18n';
 
 import { useStyles2 } from '../../../themes/ThemeContext';
 import { Button } from '../../Button/Button';
@@ -36,7 +36,6 @@ interface Props {
   fiscalYearStartMonth?: number;
   roundup?: boolean;
   isReversed?: boolean;
-  onError?: (error?: string) => void;
   weekStart?: WeekStart;
 }
 
@@ -52,7 +51,11 @@ const ERROR_MESSAGES = {
   range: () => t('time-picker.range-content.range-error', '"From" can\'t be after "To"'),
 };
 
-export const TimeRangeContent = (props: Props) => {
+export interface TimeRangeContentHandle {
+  apply: () => void;
+}
+
+const TimeRangeContentComponent = (props: Props, ref: React.ForwardedRef<TimeRangeContentHandle>) => {
   const {
     value,
     isFullscreen = false,
@@ -60,7 +63,6 @@ export const TimeRangeContent = (props: Props) => {
     onApply: onApplyFromProps,
     isReversed,
     fiscalYearStartMonth,
-    onError,
     weekStart,
   } = props;
   const [fromValue, toValue] = valueToState(value.raw.from, value.raw.to, timeZone);
@@ -99,6 +101,14 @@ export const TimeRangeContent = (props: Props) => {
     onApplyFromProps(timeRange);
   }, [from.invalid, from.validationValue, onApplyFromProps, timeZone, to.invalid, to.validationValue, fiscalYearStartMonth]);
 
+  useImperativeHandle(
+    ref,
+    () => ({
+      apply: onApply,
+    }),
+    [onApply]
+  );
+
   const onChange = useCallback(
     (from: DateTime | string, to: DateTime | string) => {
       const [fromValue, toValue] = valueToState(from, to, timeZone);
@@ -112,30 +122,6 @@ export const TimeRangeContent = (props: Props) => {
     if (event.key === 'Enter') {
       onApply();
     }
-  };
-
-  const onCopy = () => {
-    const rawSource: RawTimeRange = value.raw;
-    const clipboardPayload = rangeUtil.formatRawTimeRange(rawSource);
-    navigator.clipboard.writeText(JSON.stringify(clipboardPayload));
-  };
-
-  const onPaste = async () => {
-    const raw = await navigator.clipboard.readText();
-    let range;
-
-    try {
-      range = JSON.parse(raw);
-    } catch (error) {
-      if (onError) {
-        onError(raw);
-      }
-      return;
-    }
-
-    const [fromValue, toValue] = valueToState(range.from, range.to, timeZone);
-    setFrom(fromValue);
-    setTo(toValue);
   };
 
   const fiscalYear = rangeUtil.convertRawToRange({ from: 'now/fy', to: 'now/fy' }, timeZone, fiscalYearStartMonth);
@@ -200,27 +186,6 @@ export const TimeRangeContent = (props: Props) => {
         </Field>
         {fyTooltip}
       </div>
-      <div className={style.buttonsContainer}>
-        <Button
-          data-testid={selectors.components.TimePicker.copyTimeRange}
-          icon="copy"
-          variant="secondary"
-          tooltip={t('time-picker.copy-paste.tooltip-copy', 'Copy time range to clipboard')}
-          type="button"
-          onClick={onCopy}
-        />
-        <Button
-          data-testid={selectors.components.TimePicker.pasteTimeRange}
-          icon="clipboard-alt"
-          variant="secondary"
-          tooltip={t('time-picker.copy-paste.tooltip-paste', 'Paste time range')}
-          type="button"
-          onClick={onPaste}
-        />
-        <Button data-testid={selectors.components.TimePicker.applyTimeRange} type="button" onClick={onApply}>
-          <Trans i18nKey="time-picker.range-content.apply-button">Apply time range</Trans>
-        </Button>
-      </div>
 
       <TimePickerCalendar
         isFullscreen={isFullscreen}
@@ -237,6 +202,8 @@ export const TimeRangeContent = (props: Props) => {
     </div>
   );
 };
+
+export const TimeRangeContent = forwardRef<TimeRangeContentHandle, Props>(TimeRangeContentComponent);
 
 function isRangeInvalid(from: string, to: string, timezone?: string): boolean {
   const raw: RawTimeRange = { from, to };
@@ -331,11 +298,6 @@ function getStyles(theme: GrafanaTheme2) {
   return {
     fieldContainer: css({
       display: 'flex',
-    }),
-    buttonsContainer: css({
-      display: 'flex',
-      gap: theme.spacing(0.5),
-      marginTop: theme.spacing(1),
     }),
     tooltip: css({
       paddingLeft: theme.spacing(1),

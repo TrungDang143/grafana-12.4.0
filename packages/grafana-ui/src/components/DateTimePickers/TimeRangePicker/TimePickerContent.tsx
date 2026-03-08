@@ -1,5 +1,5 @@
 import { css, cx } from '@emotion/css';
-import { memo, useMemo, useState } from 'react';
+import { memo, useMemo, useState, useRef } from 'react';
 
 import { GrafanaTheme2, isDateTime, rangeUtil, RawTimeRange, TimeOption, TimeRange, TimeZone } from '@grafana/data';
 import { selectors } from '@grafana/e2e-selectors';
@@ -17,7 +17,7 @@ import { WeekStart } from '../WeekStartPicker';
 
 import { TimePickerFooter } from './TimePickerFooter';
 import { TimePickerTitle } from './TimePickerTitle';
-import { TimeRangeContent } from './TimeRangeContent';
+import { TimeRangeContent, TimeRangeContentHandle } from './TimeRangeContent';
 import { TimeRangeList } from './TimeRangeList';
 import { mapOptionToTimeRange, mapRangeToTimeOption } from './mapper';
 import {
@@ -32,6 +32,7 @@ interface Props {
   onChange: (timeRange: TimeRange) => void;
   onChangeTimeZone: (timeZone: TimeZone) => void;
   onChangeFiscalYearStartMonth?: (month: number) => void;
+  onClose?: () => void;
   onError?: (error?: string) => void;
   timeZone?: TimeZone;
   fiscalYearStartMonth?: number;
@@ -62,6 +63,7 @@ export interface PropsWithScreenSize extends Props {
 
 interface FormProps extends Omit<Props, 'history'> {
   historyOptions?: TimeOption[];
+  timeRangeContentRef?: React.RefObject<TimeRangeContentHandle>;
 }
 
 export const TimePickerContentWithScreenSize = (props: PropsWithScreenSize) => {
@@ -80,6 +82,7 @@ export const TimePickerContentWithScreenSize = (props: PropsWithScreenSize) => {
     hideTimeZone,
     onChangeTimeZone,
     onChangeFiscalYearStartMonth,
+    onClose,
     onFilterChange,
     productNameVariable,
   } = props;
@@ -106,6 +109,8 @@ export const TimePickerContentWithScreenSize = (props: PropsWithScreenSize) => {
       productName: [],
     }
   );
+
+  const timeRangeContentRef = useRef<TimeRangeContentHandle>(null);
 
   const filteredQuickOptions = quickOptions.filter((o) => o.display.toLowerCase().includes(searchTerm.toLowerCase()));
 
@@ -286,7 +291,7 @@ export const TimePickerContentWithScreenSize = (props: PropsWithScreenSize) => {
 
             {/* Column 3: Time Range */}
             <div className={styles.col3}>
-              <FullScreenForm {...props} historyOptions={historyOptions} />
+              <FullScreenForm {...props} historyOptions={historyOptions} timeRangeContentRef={timeRangeContentRef} />
             </div>
 
             {/* Column 4: Quick Ranges */}
@@ -307,6 +312,31 @@ export const TimePickerContentWithScreenSize = (props: PropsWithScreenSize) => {
             </div>
           </>
         )}
+      </div>
+      <div className={styles.footer}>
+        <Button
+          variant="secondary"
+          onClick={() => {
+            onClose?.();
+          }}
+        >
+          {t('time-picker.range-content.cancel-button', 'Huỷ')}
+        </Button>
+        <Button
+          variant="secondary"
+          onClick={() => {
+            onChange(rangeUtil.convertRawToRange({ from: 'now', to: 'now' }, timeZone, fiscalYearStartMonth, undefined));
+          }}
+        >
+          {t('time-picker.range-content.clear-filter-button', 'Bỏ lọc')}
+        </Button>
+        <Button
+          onClick={() => {
+            timeRangeContentRef.current?.apply();
+          }}
+        >
+          {t('time-picker.range-content.confirm-button', 'Xác nhận')}
+        </Button>
       </div>
       {!hideTimeZone && isFullscreen && (
         <TimePickerFooter
@@ -367,7 +397,6 @@ const NarrowScreenForm = (props: FormProps) => {
               onApply={onChange}
               timeZone={timeZone}
               isFullscreen={false}
-              onError={onError}
               weekStart={weekStart}
             />
           </div>
@@ -386,7 +415,7 @@ const NarrowScreenForm = (props: FormProps) => {
 };
 
 const FullScreenForm = (props: FormProps) => {
-  const { onChange, value, timeZone, fiscalYearStartMonth, isReversed, historyOptions, onError, weekStart } = props;
+  const { onChange, value, timeZone, fiscalYearStartMonth, isReversed, historyOptions, onError, weekStart, timeRangeContentRef } = props;
   const styles = useStyles2(getFullScreenStyles, props.hideQuickRanges);
   const onChangeTimeOption = (timeOption: TimeOption) => {
     return onChange(mapOptionToTimeRange(timeOption, timeZone));
@@ -401,13 +430,13 @@ const FullScreenForm = (props: FormProps) => {
           </TimePickerTitle>
         </div>
         <TimeRangeContent
+          ref={timeRangeContentRef}
           value={value}
           timeZone={timeZone}
           fiscalYearStartMonth={fiscalYearStartMonth}
           onApply={onChange}
           isFullscreen={true}
           isReversed={isReversed}
-          onError={onError}
           weekStart={weekStart}
         />
       </div>
@@ -552,6 +581,13 @@ const getStyles = (
     display: 'flex',
     gap: theme.spacing(0.5),
     alignItems: 'center',
+  }),
+  footer: css({
+    display: 'flex',
+    gap: theme.spacing(1),
+    justifyContent: 'flex-end',
+    borderTop: `1px solid ${theme.colors.border.weak}`,
+    padding: theme.spacing(2),
   }),
 });
 

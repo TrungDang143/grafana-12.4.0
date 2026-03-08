@@ -204,6 +204,7 @@ export function TimeRangePicker(props: TimeRangePickerProps) {
                 fiscalYearStartMonth={fiscalYearStartMonth}
                 value={value}
                 onChange={onChange}
+                onClose={onClose}
                 quickOptions={quickRanges || getCustomRelativeTimeRanges()}
                 history={history}
                 showHistory
