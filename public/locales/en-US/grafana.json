@@ -14105,8 +14105,8 @@
   },
   "time-picker": {
     "absolute": {
-      "recent-title": "Recently used absolute ranges",
-      "title": "Absolute time range"
+      "recent-title": "Khoảng thời gian được sử dụng gần đây",
+      "title": "Chọn khoảng thời gian"
     },
     "calendar": {
       "apply-button": "Apply time range",
