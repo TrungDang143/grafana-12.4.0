@@ -23,8 +23,9 @@ FROM --platform=${JS_PLATFORM} ${JS_IMAGE} AS js-builder
 ARG JS_NODE_ENV=production
 ARG JS_YARN_INSTALL_FLAG=--immutable
 ARG JS_YARN_BUILD_FLAG=build
+ARG JS_NODE_OPTIONS=--max_old_space_size=8000
 
-ENV NODE_OPTIONS=--max_old_space_size=8000
+ENV NODE_OPTIONS=${JS_NODE_OPTIONS}
 
 WORKDIR /tmp/grafana
 
