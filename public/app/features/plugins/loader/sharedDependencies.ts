@@ -1,13 +1,14 @@
 import jquery from 'jquery';
-import 'vendor/flot/jquery.flot';
-import 'vendor/flot/jquery.flot.selection';
-import 'vendor/flot/jquery.flot.time';
-import 'vendor/flot/jquery.flot.stack';
-import 'vendor/flot/jquery.flot.stackpercent';
-import 'vendor/flot/jquery.flot.fillbelow';
-import 'vendor/flot/jquery.flot.crosshair';
-import 'vendor/flot/jquery.flot.dashes';
-import 'vendor/flot/jquery.flot.gauge';
+// Legacy jQuery Flot plugins - disabled as vendor folder is not included
+// import 'vendor/flot/jquery.flot';
+// import 'vendor/flot/jquery.flot.selection';
+// import 'vendor/flot/jquery.flot.time';
+// import 'vendor/flot/jquery.flot.stack';
+// import 'vendor/flot/jquery.flot.stackpercent';
+// import 'vendor/flot/jquery.flot.fillbelow';
+// import 'vendor/flot/jquery.flot.crosshair';
+// import 'vendor/flot/jquery.flot.dashes';
+// import 'vendor/flot/jquery.flot.gauge';
 
 import * as grafanaData from '@grafana/data';
 import * as grafanaRuntime from '@grafana/runtime';
@@ -34,18 +35,20 @@ grafanaUI.DataSourcePlugin = grafanaData.DataSourcePlugin;
 grafanaUI.AppPlugin = grafanaData.AppPlugin;
 grafanaUI.DataSourceApi = grafanaData.DataSourceApi;
 
-const jQueryFlotDeps = [
-  'jquery.flot.crosshair',
-  'jquery.flot.events',
-  'jquery.flot.fillbelow',
-  'jquery.flot.gauge',
-  'jquery.flot.pie',
-  'jquery.flot.selection',
-  'jquery.flot.stack',
-  'jquery.flot.stackpercent',
-  'jquery.flot.time',
-  'jquery.flot',
-].reduce((acc, flotDep) => ({ ...acc, [flotDep]: { fakeDep: 1 } }), {});
+const jQueryFlotDeps: Record<string, { fakeDep: number }> = {};
+// Legacy flot dependencies disabled as vendor folder is not included
+// [
+//   'jquery.flot.crosshair',
+//   'jquery.flot.events',
+//   'jquery.flot.fillbelow',
+//   'jquery.flot.gauge',
+//   'jquery.flot.pie',
+//   'jquery.flot.selection',
+//   'jquery.flot.stack',
+//   'jquery.flot.stackpercent',
+//   'jquery.flot.time',
+//   'jquery.flot',
+// ].reduce((acc, flotDep) => ({ ...acc, [flotDep]: { fakeDep: 1 } }), {});
 
 export const sharedDependenciesMap = {
   '@emotion/css': () => import('@emotion/css'),
