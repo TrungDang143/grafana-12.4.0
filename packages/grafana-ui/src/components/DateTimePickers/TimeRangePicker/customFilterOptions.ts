@@ -16,9 +16,24 @@ export const getCustomRelativeTimeRanges = (): TimeOption[] => [
     display: t('custom-filters.time-ranges.today', 'Trong ngày'),
   },
   {
+    from: 'now-3d/d',       // từ đầu ngày cách đây 3 ngày
+    to: 'now/d',            // đến cuối ngày hiện tại
+    display: t('custom-filters.time-ranges.last-3-days', '3 ngày qua'),
+  },
+  {
+    from: 'now-7d/d',       // từ đầu ngày cách đây 7 ngày
+    to: 'now/d',            // đến cuối ngày hiện tại
+    display: t('custom-filters.time-ranges.last-7-days', '7 ngày qua'),
+  },
+  {
+    from: 'now-30d/d',      // từ đầu ngày cách đây 30 ngày
+    to: 'now/d',            // đến cuối ngày hiện tại
+    display: t('custom-filters.time-ranges.last-30-days', '30 ngày qua'),
+  },
+  {
     from: 'now/w',        // đầu tuần (thứ 2)
     to: 'now/w',   // cuối tuần (chủ nhật)
-    display: t('custom-filters.time-ranges.this-week', 'Trong tuần'),
+    display: t('custom-filters.time-ranges.this-week', 'Tuần hiện tại'),
   },
   {
     from: 'now-1w/w',     // đầu tuần trước
