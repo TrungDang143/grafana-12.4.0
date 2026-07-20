@@ -158,7 +158,7 @@ jobs:
     steps:
       - id: get-github-token
         name: "create github app token"
-        uses: grafana/shared-workflows/actions/create-github-app-token@eb02241ed0a92aff205feab8ac3afcdf51c757c8 # create-github-app-token-v0.2.0
+        uses: grafana/shared-workflows/actions/create-github-app-token@46f48da11e78ebdba7a8747ae456b11062fac83e # create-github-app-token-v0.3.1
         with:
           github_app: "delivery-bot-app"
       - uses: grafana/shared-workflows/actions/login-to-gar@main
