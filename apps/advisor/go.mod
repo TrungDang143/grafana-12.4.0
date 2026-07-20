@@ -1,6 +1,6 @@
 module github.com/grafana/grafana/apps/advisor
 
-go 1.25.7
+go 1.26.3
 
 require (
 	github.com/Masterminds/semver/v3 v3.4.0
@@ -9,7 +9,7 @@ require (
 	github.com/grafana/authlib/types v0.0.0-20260203131350-b83e80394acc
 	github.com/grafana/grafana v0.0.0-00010101000000-000000000000
 	github.com/grafana/grafana-app-sdk v0.50.2
-	github.com/grafana/grafana-app-sdk/logging v0.50.2
+	github.com/grafana/grafana-app-sdk/logging v0.56.5
 	github.com/grafana/grafana-plugin-sdk-go v0.287.0
 	github.com/grafana/grafana/pkg/apimachinery v0.0.0
 	github.com/grafana/grafana/pkg/plugins v0.0.0
@@ -294,14 +294,14 @@ require (
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.64.0 // indirect
 	go.opentelemetry.io/contrib/propagators/jaeger v1.39.0 // indirect
 	go.opentelemetry.io/contrib/samplers/jaegerremote v0.33.0 // indirect
-	go.opentelemetry.io/otel v1.39.0 // indirect
+	go.opentelemetry.io/otel v1.43.0 // indirect
 	go.opentelemetry.io/otel/exporters/jaeger v1.17.0 // indirect
 	go.opentelemetry.io/otel/exporters/otlp/otlptrace v1.39.0 // indirect
 	go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc v1.39.0 // indirect
 	go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp v1.39.0 // indirect
-	go.opentelemetry.io/otel/metric v1.39.0 // indirect
+	go.opentelemetry.io/otel/metric v1.43.0 // indirect
 	go.opentelemetry.io/otel/sdk v1.39.0 // indirect
-	go.opentelemetry.io/otel/trace v1.39.0 // indirect
+	go.opentelemetry.io/otel/trace v1.43.0 // indirect
 	go.opentelemetry.io/proto/otlp v1.9.0 // indirect
 	go.uber.org/atomic v1.11.0 // indirect
 	go.uber.org/mock v0.6.0 // indirect
@@ -342,7 +342,7 @@ require (
 	k8s.io/api v0.35.0 // indirect
 	k8s.io/apiextensions-apiserver v0.35.0 // indirect
 	k8s.io/component-base v0.35.0 // indirect
-	k8s.io/klog/v2 v2.130.1 // indirect
+	k8s.io/klog/v2 v2.140.0 // indirect
 	k8s.io/kms v0.35.0 // indirect
 	k8s.io/utils v0.0.0-20251002143259-bc988d571ff4 // indirect
 	modernc.org/libc v1.67.6 // indirect
