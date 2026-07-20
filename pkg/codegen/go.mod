@@ -4,7 +4,7 @@ go 1.25.7
 
 require (
 	cuelang.org/go v0.11.1
-	github.com/dave/dst v0.27.3
+	github.com/dave/dst v0.27.4
 	github.com/grafana/codejen v0.0.4-0.20250428224353-8764ced07770
 	github.com/grafana/cog v0.0.48
 	github.com/grafana/cuetsy v0.1.11
