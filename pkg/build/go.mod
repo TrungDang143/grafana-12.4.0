@@ -10,13 +10,13 @@ replace github.com/docker/docker => github.com/moby/moby v28.0.1+incompatible
 require (
 	github.com/google/uuid v1.6.0 // indirect; @grafana/grafana-backend-group
 	github.com/urfave/cli/v2 v2.27.7 // @grafana/grafana-backend-group
-	go.opentelemetry.io/otel v1.39.0 // indirect; @grafana/grafana-backend-group
-	go.opentelemetry.io/otel/sdk v1.39.0 // indirect; @grafana/grafana-backend-group
-	go.opentelemetry.io/otel/trace v1.39.0 // indirect; @grafana/grafana-backend-group
-	golang.org/x/net v0.49.0 // indirect; @grafana/oss-big-tent @grafana/partner-datasources
-	golang.org/x/sync v0.19.0 // @grafana/alerting-backend
-	golang.org/x/text v0.33.0 // indirect; @grafana/grafana-backend-group
-	google.golang.org/grpc v1.78.0 // indirect; @grafana/plugins-platform-backend
+	go.opentelemetry.io/otel v1.44.0 // indirect; @grafana/grafana-backend-group
+	go.opentelemetry.io/otel/sdk v1.44.0 // indirect; @grafana/grafana-backend-group
+	go.opentelemetry.io/otel/trace v1.44.0 // indirect; @grafana/grafana-backend-group
+	golang.org/x/net v0.56.0 // indirect; @grafana/oss-big-tent @grafana/partner-datasources
+	golang.org/x/sync v0.21.0 // @grafana/alerting-backend
+	golang.org/x/text v0.38.0 // indirect; @grafana/grafana-backend-group
+	google.golang.org/grpc v1.82.1 // indirect; @grafana/plugins-platform-backend
 	google.golang.org/protobuf v1.36.11 // indirect; @grafana/plugins-platform-backend
 )
 
@@ -28,10 +28,10 @@ require (
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/xrash/smetrics v0.0.0-20240521201337-686a1a2994c1 // indirect
-	go.opentelemetry.io/otel/metric v1.39.0 // indirect
-	golang.org/x/sys v0.40.0 // indirect
-	google.golang.org/genproto/googleapis/api v0.0.0-20251222181119-0a764e51fe1b // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20251222181119-0a764e51fe1b // indirect
+	go.opentelemetry.io/otel/metric v1.44.0 // indirect
+	golang.org/x/sys v0.46.0 // indirect
+	google.golang.org/genproto/googleapis/api v0.0.0-20260630182238-925bb5da69e7 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20260630182238-925bb5da69e7 // indirect
 )
 
 require (
@@ -62,9 +62,8 @@ require (
 	go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp v1.39.0 // indirect
 	go.opentelemetry.io/otel/log v0.15.0 // indirect
 	go.opentelemetry.io/otel/sdk/log v0.15.0 // indirect
-	go.opentelemetry.io/otel/sdk/metric v1.39.0 // indirect
+	go.opentelemetry.io/otel/sdk/metric v1.44.0 // indirect
 	go.opentelemetry.io/proto/otlp v1.9.0 // indirect
-	gonum.org/v1/gonum v0.17.0 // indirect
 )
 
 // Use fork of crewjam/saml with fixes for some issues until changes get merged into upstream
