@@ -1,6 +1,6 @@
 module github.com/grafana/grafana/pkg/build
 
-go 1.25.7
+go 1.26.0
 
 // Override docker/docker to avoid:
 // go: github.com/drone-runners/drone-runner-docker@v1.8.2 requires
@@ -13,23 +13,21 @@ require (
 	go.opentelemetry.io/otel v1.39.0 // indirect; @grafana/grafana-backend-group
 	go.opentelemetry.io/otel/sdk v1.39.0 // indirect; @grafana/grafana-backend-group
 	go.opentelemetry.io/otel/trace v1.39.0 // indirect; @grafana/grafana-backend-group
-	golang.org/x/net v0.49.0 // indirect; @grafana/oss-big-tent @grafana/partner-datasources
-	golang.org/x/sync v0.19.0 // @grafana/alerting-backend
-	golang.org/x/text v0.33.0 // indirect; @grafana/grafana-backend-group
+	golang.org/x/net v0.57.0 // indirect; @grafana/oss-big-tent @grafana/partner-datasources
+	golang.org/x/sync v0.22.0 // @grafana/alerting-backend
+	golang.org/x/text v0.41.0 // indirect; @grafana/grafana-backend-group
 	google.golang.org/grpc v1.78.0 // indirect; @grafana/plugins-platform-backend
-	google.golang.org/protobuf v1.36.11 // indirect; @grafana/plugins-platform-backend
+	google.golang.org/protobuf v1.36.12 // indirect; @grafana/plugins-platform-backend
 )
 
 require (
 	github.com/cpuguy83/go-md2man/v2 v2.0.7 // indirect
-	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/go-logr/logr v1.4.3 // indirect; @grafana/grafana-app-platform-squad
 	github.com/go-logr/stdr v1.2.2 // indirect
-	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/xrash/smetrics v0.0.0-20240521201337-686a1a2994c1 // indirect
 	go.opentelemetry.io/otel/metric v1.39.0 // indirect
-	golang.org/x/sys v0.40.0 // indirect
+	golang.org/x/sys v0.47.0 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20251222181119-0a764e51fe1b // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20251222181119-0a764e51fe1b // indirect
 )
@@ -51,6 +49,7 @@ require (
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/sergi/go-diff v1.3.2-0.20230802210424-5b0b94c5c0d3 // indirect
 	github.com/sosodev/duration v1.3.1 // indirect
+	github.com/stretchr/testify v1.12.1 // indirect
 	github.com/vektah/gqlparser/v2 v2.5.27 // indirect
 	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
 	go.opentelemetry.io/otel/exporters/otlp/otlplog/otlploggrpc v0.15.0 // indirect
